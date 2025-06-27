@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto'; sans-serif;
+}
+body {
+    background-color: #aa7cea;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+section {
+    background-color: white;
+    padding: 10px;
+    width: 450px;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+h1 {
+  text-align: center;
+  margin-bottom: 10px;  
+}
+.full-input {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+input {
+    width: 90%;
+    padding: 10px 5px;
+    height: 39px;
+    border: 1px solid #b3b2b2;
+    outline: 0;
+    border-radius: 6px 0 0 6px;
+
+}
+button{
+    width: 10%;
+    font-size: 20px;
+    height: 39px;
+    border: 0;
+    background-color: #aa7cea;
+    color: #fff;
+    border-radius: 0 6px 6px 0;
+}
+
+.paragraphe_style {
+    margin: 3px 0;
+    padding: 10px 0;
+    padding-left: 5px;
+    border-radius: 7px;
+    color: #fff;
+    background-color: #aa7cea;
+    word-break: break-all;
+    cursor: pointer;
+    user-select: none;
+    margin: 5; /* Supprime la marge par défaut */
+    display: inline-block;
+    width: 290px;
+}
+
+.paragraphe_style:last-child{
+    margin-bottom: 0;
+}
+@keyframes anime {
+    from {
+        transform: translateY(50px);
+    }
+
+}
+
+.paragraph_click {
+    text-decoration: line-through;
+    color: #fff;
+    background-color: rgb(247, 118, 118);
+}
+
+.timer {
+    font-size: 14px;
+    color: #555;
+    margin-left: 10px;
+    display: inline-block;
+    width: 40px;
+}
+
+.pause-btn {
+    border-radius: 4px;
+}
+
+
+.no-timer {
+    margin-bottom: 2px; /* Peu d’espace entre tâches sans timer */
+    padding-bottom: 2px;
+}
+
+#toDoContainer {
+    margin-top: 2px; /* Ajuste à ta préférence : 10px, 15px, etc. */
+}
