@@ -2,13 +2,23 @@ var addToDoButton = document.getElementById('addToDo');
 var toDoContainer = document.getElementById('toDoContainer');
 var inputField = document.getElementById('inputField');
 var timeField = document.getElementById('timeField');
+var bgColorPicker = document.getElementById('bgColorPicker');
 var tasks = [];
 
 window.onload = function () {
+    // Charge les tâches
     tasks = JSON.parse(localStorage.getItem('tasks')) || [];
     tasks.forEach(task => {
         createTask(task.text, task.done, task.remainingSeconds, task.paused);
     });
+
+    // Charge couleur fond sauvegardée (ou défaut)
+    const savedColor = localStorage.getItem('backgroundColor') || '#aa7cea';
+    document.body.style.backgroundColor = savedColor;
+    bgColorPicker.value = savedColor;
+    addToDoButton.style.backgroundColor = savedColor; // applique aussi au bouton +
+
+    updateTaskBackgroundColors(savedColor);
 }
 
 addToDoButton.onclick = function () {
@@ -42,7 +52,15 @@ function createTask(text, done = false, remainingSeconds = 0, paused = false) {
 
     paragraph.innerText = text;
     paragraph.classList.add('paragraphe_style');
-    if (done) paragraph.classList.add('paragraph_click');
+
+    if (done) {
+        paragraph.classList.add('paragraph_click');
+        paragraph.style.backgroundColor = 'red';
+        paragraph.style.color = 'white';
+    } else {
+        paragraph.style.backgroundColor = document.body.style.backgroundColor;
+        paragraph.style.color = 'white'; // texte blanc quand tâche non cochée
+    }
 
     timer.classList.add('timer');
 
@@ -53,6 +71,8 @@ function createTask(text, done = false, remainingSeconds = 0, paused = false) {
     pauseBtn.style.fontSize = '14px';
     pauseBtn.style.cursor = 'pointer';
     pauseBtn.style.marginLeft = '0';
+    pauseBtn.style.backgroundColor = document.body.style.backgroundColor; // bouton pause couleur fond
+    pauseBtn.style.color = 'white'; // texte bouton pause en blanc
 
     if (remainingSeconds > 0) {
         updateTimerDisplay(timer, remainingSeconds);
@@ -74,13 +94,17 @@ function createTask(text, done = false, remainingSeconds = 0, paused = false) {
         paragraph.classList.toggle('paragraph_click');
 
         if (paragraph.classList.contains('paragraph_click')) {
+            paragraph.style.backgroundColor = '#fb6565';
+            paragraph.style.color = 'white';
             deleteTimeout = setTimeout(() => {
                 toDoContainer.removeChild(taskWrapper);
                 tasks = tasks.filter(t => t.text !== text);
                 saveTasks();
             }, 5000);
-        } else if (deleteTimeout) {
-            clearTimeout(deleteTimeout);
+        } else {
+            if (deleteTimeout) clearTimeout(deleteTimeout);
+            paragraph.style.backgroundColor = document.body.style.backgroundColor;
+            paragraph.style.color = 'white'; // texte blanc quand décoché
         }
 
         saveTasks();
@@ -146,3 +170,37 @@ function saveTasks() {
     localStorage.setItem('tasks', JSON.stringify(updated));
     tasks = updated;
 }
+
+// Mets à jour la couleur de fond et du texte des tâches non cochées
+function updateTaskBackgroundColors(color) {
+    const taskTexts = document.querySelectorAll('.paragraphe_style');
+    taskTexts.forEach(taskText => {
+        if (!taskText.classList.contains('paragraph_click')) {
+            taskText.style.backgroundColor = color;
+            taskText.style.color = 'white'; // texte blanc
+        }
+    });
+
+    // Mise à jour bouton pause aussi, s'il y en a
+    const pauseButtons = document.querySelectorAll('.pause-btn');
+    pauseButtons.forEach(btn => {
+        btn.style.backgroundColor = color;
+        btn.style.color = 'white';
+    });
+}
+
+// Gestion changement couleur fond
+bgColorPicker.addEventListener('change', function () {
+    document.body.style.backgroundColor = this.value;
+    addToDoButton.style.backgroundColor = this.value;  // Change aussi le bouton +
+    updateTaskBackgroundColors(this.value);
+    localStorage.setItem('backgroundColor', this.value);
+});
+
+document.getElementById('clearAll').addEventListener('click', function () {
+    if (confirm("Es-tu sûr de vouloir supprimer toutes les tâches ?")) {
+        toDoContainer.innerHTML = "";
+        tasks = [];
+        localStorage.removeItem('tasks');
+    }
+});

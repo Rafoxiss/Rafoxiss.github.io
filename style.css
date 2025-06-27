@@ -4,7 +4,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Roboto'; sans-serif;
+    font-family: 'Roboto', sans-serif;
 }
 body {
     background-color: #aa7cea;
@@ -37,16 +37,16 @@ input {
     border: 1px solid #b3b2b2;
     outline: 0;
     border-radius: 6px 0 0 6px;
-
 }
 button{
     width: 10%;
     font-size: 20px;
     height: 39px;
     border: 0;
-    background-color: #aa7cea;
+    background-color: #555;
     color: #fff;
     border-radius: 0 6px 6px 0;
+    transition: background-color 0.3s ease;
 }
 
 .paragraphe_style {
@@ -59,7 +59,7 @@ button{
     word-break: break-all;
     cursor: pointer;
     user-select: none;
-    margin: 5; /* Supprime la marge par défaut */
+    margin: 5;
     display: inline-block;
     width: 290px;
 }
@@ -71,7 +71,6 @@ button{
     from {
         transform: translateY(50px);
     }
-
 }
 
 .paragraph_click {
@@ -90,14 +89,69 @@ button{
 
 .pause-btn {
     border-radius: 4px;
+    background-color: #555;
 }
 
-
 .no-timer {
-    margin-bottom: 2px; /* Peu d’espace entre tâches sans timer */
+    margin-bottom: 2px;
     padding-bottom: 2px;
 }
 
 #toDoContainer {
-    margin-top: 2px; /* Ajuste à ta préférence : 10px, 15px, etc. */
+    margin-top: 2px;
+}
+
+#clearAll {
+    width: 10%;
+    height: 39px;
+    font-size: 18px;
+    border: none;
+    background-color: rgb(247, 118, 118);
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+/* Nouveau style pour sélecteur couleur en haut à gauche */
+#colorSelectorContainer {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  padding: 5px 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  z-index: 1000;
+  user-select: none;
+  font-size: 18px;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease;
+}
+
+#colorSelectorContainer:hover {
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+#colorSelectorContainer label {
+  cursor: pointer;
+}
+
+#bgColorPicker {
+  border: none;
+  background: transparent;
+  font-size: 14px;
+  cursor: pointer;
+  outline: none;
+  padding: 3px 5px;
+  border-radius: 5px;
+  box-shadow: inset 0 0 3px rgba(0,0,0,0.1);
+  transition: background-color 0.3s ease;
+}
+
+#bgColorPicker:hover, #bgColorPicker:focus {
+  background-color: #f0f0f0;
 }

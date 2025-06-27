@@ -7,6 +7,19 @@
     <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+
+    <!-- Sélecteur de couleur fixé en haut à gauche -->
+    <div id="colorSelectorContainer">
+        <label for="bgColorPicker" title="Changer la couleur de fond">🎨 Couleur</label>
+        <select id="bgColorPicker" aria-label="Sélecteur de couleur fond">
+            <option value="#aa7cea">Violet (défaut)</option>
+            <option value="#d5aa0e">Orange</option>
+            <option value="#2a9d8f">Turquoise</option>
+            <option value="#555">Gris foncé</option>
+            <option value="#264653">Bleu foncé</option>
+        </select>
+    </div>
+
     <section>
         <h1>To Do List</h1>
         <div class="container">
@@ -14,12 +27,12 @@
                 <input type="text" placeholder="Ajouter une tâche..." id="inputField" />
                 <input type="number" min="0" placeholder="Temps (min)" id="timeField" style="width: 100px; margin-left: 8px;" />
                 <button id="addToDo">+</button>
+                <button id="clearAll" title="Supprimer toutes les tâches">🗑️</button>
             </div>
             <div id="toDoContainer"></div>
         </div>
     </section>
 
-    <!-- Relier fichier JS -->
     <script src="script.js"></script>
 </body>
 </html>
